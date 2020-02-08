@@ -4,6 +4,8 @@ import java.nio.file.FileVisitResult;
 public class Chess {
 	//read layout file, add pieces
 	public static void layOut(String l) throws FileNotFoundException, IOException {
+		//first clear Board
+		Board.theBoard().clear();
 		try {
 			File file = new File(l);
 			BufferedReader r = new BufferedReader(new FileReader(file));

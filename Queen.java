@@ -5,7 +5,11 @@ public class Queen extends Piece {
         super(c);
     }
     public String toString() {
-        return this.color()+"q";
+        if(this.color().equals(Color.WHITE)) {
+            return "wq";
+        }else {
+            return "bq";
+        }
     }
 
     public List<String> moves(Board b, String loc) {

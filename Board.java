@@ -7,9 +7,10 @@ public class Board {
 
     //col:a-h == 0-7 row:1-8 == 0-7
     private Piece[][] pieces = new Piece[8][8];
-    private List<BoardListener> listeners;
+    private List<BoardListener> listeners = new LinkedList<BoardListener>();
 
-    private Board() { }
+    private Board() {
+    }
     
     public static Board theBoard() {
 	return instance;

@@ -3,11 +3,14 @@ import java.util.*;
 public class Knight extends Piece {
     public Knight(Color c) {
         super(c);
-        throw new UnsupportedOperationException(); }
-    // implement appropriate methods
+        }
 
     public String toString() {
-        return this.color()+"n";
+        if(this.color().equals(Color.WHITE)) {
+            return "wn";
+        }else {
+            return "bn";
+        }
     }
 
     public List<String> moves(Board b, String loc) {

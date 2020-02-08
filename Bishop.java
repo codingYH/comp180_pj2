@@ -6,7 +6,11 @@ public class Bishop extends Piece {
     }
 
     public String toString() {
-        return this.color()+"b";
+        if(this.color().equals(Color.WHITE)) {
+            return "wb";
+        }else {
+            return "bb";
+        }
     }
 
     public List<String> moves(Board b, String loc) {

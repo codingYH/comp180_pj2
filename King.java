@@ -6,7 +6,11 @@ public class King extends Piece {
     }
 
     public String toString() {
-        return this.color()+"k";
+        if(this.color().equals(Color.WHITE)) {
+            return "wk";
+        }else {
+            return "bk";
+        }
     }
 
     //board's rows 1-8 and the columns a-h

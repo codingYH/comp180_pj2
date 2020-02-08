@@ -5,7 +5,11 @@ public class Rook extends Piece {
         super(c);
     }
     public String toString() {
-        return this.color()+"r";
+        if(this.color().equals(Color.WHITE)) {
+            return "wr";
+        }else {
+            return "br";
+        }
     }
 
     public List<String> moves(Board b, String loc) {

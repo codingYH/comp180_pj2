@@ -6,7 +6,11 @@ public class Pawn extends Piece {
     }
 
     public String toString() {
-        return this.color()+"p";
+        if(this.color().equals(Color.WHITE)) {
+            return "wp";
+        }else {
+            return "bp";
+        }
     }
 
     //move one space vertically forward,
