@@ -85,7 +85,7 @@ public class Board {
     public void iterate(BoardExternalIterator bi) {
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
-                bi.visit(toStringLoc(i, j), pieces[i][j]);
+                bi.visit(toStringLoc(j, i), pieces[j][i]);
             }
         }
     }

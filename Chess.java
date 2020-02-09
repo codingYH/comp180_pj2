@@ -67,6 +67,8 @@ public class Chess {
 	// Put your code to read the layout file and moves files
 	// here.
 	layOut(args[0]);
+	System.out.println("Initial board:");
+	Board.theBoard().iterate(new BoardPrinter());
 	playMoves(args[1]);
 
 	// Leave the following code at the end of the simulation:

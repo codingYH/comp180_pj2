@@ -6,9 +6,9 @@ public class Pawn extends Piece {
     }
 
     public String toString() {
-        if(this.color().equals(Color.WHITE)) {
+        if (this.color().equals(Color.WHITE)) {
             return "wp";
-        }else {
+        } else {
             return "bp";
         }
     }
@@ -22,59 +22,54 @@ public class Pawn extends Piece {
         int r = Character.getNumericValue(loc.charAt(1));
         if (checkLocValid(c, r)) {
             List<String> toLoc = new LinkedList<>();
-            HashMap<Character, Integer> m = new HashMap<>();
             // i is int row change, j is home row
-            int i , j;
+            int i, j;
             if (this.color() == Color.BLACK) {
                 i = -1;
                 j = 7;
-            }else if (this.color() == Color.WHITE) {
+            } else if (this.color() == Color.WHITE) {
                 i = 1;
                 j = 2;
-            }else {
+            } else {
                 throw new NoSuchElementException("pawn move exception: color type wrong");
             }
             if (checkLocValid(c, r + i)
                     && (b.getPiece(Character.toString(c) + Integer.toString(r + i)) == null)) {
-                m.put((char) (c), r + i);
+                toLoc.add(Character.toString(c) + (r + i));
                 if (checkLocValid(c, r + 2 * i)
                         && (b.getPiece(Character.toString(c) + Integer.toString(r + 2 * i)) == null)
                         && (r == j)) {
-                    m.put((char) (c), r + 2 * i);
+                    toLoc.add(Character.toString(c) + (r + 2 * i));
                 }
             }
-        for (Map.Entry<Character, Integer> entry : m.entrySet()) {
-            StringBuffer sb = new StringBuffer();
-            sb.append(entry.getKey());
-            sb.append(entry.getValue());
-            toLoc.add(sb.toString());
-        }
-        //capture possibility
-        toLoc.addAll(pawnCapture(b, c, r, this.color()));
-        return toLoc;
+            //capture possibility
+            toLoc.addAll(pawnCapture(b, c, r, this.color()));
+            return toLoc;
         } else {
             throw new NoSuchElementException("pawn move exception: wrong start loc: " + loc);
         }
     }
 
-    private List<String> pawnCapture(Board b, char c, int r, Color color){
+    private List<String> pawnCapture(Board b, char c, int r, Color color) {
         List<String> toLoc = new LinkedList<>();
-        HashMap<Character, Integer> m = new HashMap<>();
+        HashMap<Character, List<Integer>> m = new HashMap<>();
         //diagonal
-        m.put((char) (c + 1), r + 1);
-        m.put((char) (c + 1), r - 1);
-        m.put((char) (c - 1), r + 1);
-        m.put((char) (c - 1), r - 1);
-        for(Map.Entry<Character, Integer> entry : m.entrySet()){
-            // capture if is opponent one
-            if(checkLocValid(entry.getKey(), entry.getValue())
-                    && (b.getPiece(entry.getKey() + Integer.toString(entry.getValue())) != null)
-                    && (b.getPiece(entry.getKey() + Integer.toString(entry.getValue())).color() != color)){
-                StringBuffer sb = new StringBuffer();
-                sb.append(entry.getKey());
-                sb.append(entry.getValue());
-                toLoc.add(sb.toString());
+        m.put((char) (c + 1), Arrays.asList(r + 1, r - 1));
+        m.put((char) (c - 1), Arrays.asList(r + 1, r - 1));
+        for (Map.Entry<Character, List<Integer>> entry : m.entrySet()) {
+            char col = entry.getKey();
+            for (Integer row : entry.getValue()) {
+                // capture if is opponent one
+                if (checkLocValid(col, row)
+                        && (b.getPiece(col + Integer.toString(row)) != null)
+                        && (b.getPiece(col + Integer.toString(row)).color() != color)) {
+                    StringBuffer sb = new StringBuffer();
+                    sb.append(col);
+                    sb.append(row);
+                    toLoc.add(sb.toString());
+                }
             }
-        } return toLoc;
+        }
+            return toLoc;
     }
 }

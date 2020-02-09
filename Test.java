@@ -34,8 +34,11 @@ public class Test {
 		Board.theBoard().addPiece(Piece.createPiece("bp"), "c4");
 
 		List<String> toList = bk.moves(Board.theBoard(), "d5" );
-		List<String> cList = Arrays.asList("d4", "d6", "c5","e5","c4","c6","e4","e6");
+		List<String> cList = Arrays.asList("d4", "c5","e5","c6","e4","e6");
+		//size equal
+		assert  toList.size() == cList.size();
 		for(String loc : cList){
+			//contain all elements
 			assert toList.contains(loc);
 		}
 		System.out.println("Final board:");

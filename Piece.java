@@ -50,7 +50,6 @@ abstract public class Piece {
     // subclasses. For this to work, you should know
     // that subclasses can access superclass fields.
     public Color color(){
-
         return color;
     }
 
@@ -78,12 +77,18 @@ abstract public class Piece {
                     StringBuffer sb = new StringBuffer();
                     sb.append(c);
                     sb.append(r);
-                    String dLoc = sb.toString();
-                    toLoc.add(sb.toString());
-                    //move right and there is another piece
-                    //can't move forward, break the loop
-                    if(b.getPiece(sb.toString()) != null){
-                        break;
+                    //is vacant, can move
+                    if (b.getPiece(sb.toString()) == null){
+                        toLoc.add(sb.toString());
+                    }else if(b.getPiece(sb.toString()) != null){
+                        // not vacant and is friendly piece, can't move forward
+                        if(b.getPiece(sb.toString()).color().equals(this.color())){
+                            break;
+                        }else {
+                            //is opponent piece, can capture
+                            toLoc.add(sb.toString());
+                            break;
+                        }
                     }
                 }
             }

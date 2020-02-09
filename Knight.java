@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Knight extends Piece {
@@ -18,21 +19,31 @@ public class Knight extends Piece {
         int r = Character.getNumericValue(loc.charAt(1));
         if(checkLocValid(c,r)) {
             List<String> toLoc = new LinkedList<>();
-            HashMap<Character, Integer> m = new HashMap<>();
-            m.put((char) (c + 2), r + 1);
-            m.put((char) (c + 2), r - 1);
-            m.put((char) (c - 2), r + 1);
-            m.put((char) (c - 2), r - 1);
-            m.put((char) (c + 1), r + 2);
-            m.put((char) (c + 1), r - 2);
-            m.put((char) (c - 1), r + 2);
-            m.put((char) (c - 1), r - 2);
-            for(Map.Entry<Character, Integer> entry : m.entrySet()){
-                if(checkLocValid(entry.getKey(), entry.getValue())){
-                    StringBuffer sb = new StringBuffer();
-                    sb.append(entry.getKey());
-                    sb.append(entry.getValue());
-                    toLoc.add(sb.toString());
+            HashMap<Character, List<Integer>> m = new HashMap<>();
+            m.put((char) (c + 2),  Arrays.asList(r - 1, r + 1));
+            m.put((char) (c - 2),  Arrays.asList(r - 1, r + 1));
+            m.put((char) (c + 1),  Arrays.asList(r - 2, r + 2));
+            m.put((char) (c - 1),  Arrays.asList(r - 2, r + 2));
+            for(Map.Entry<Character, List<Integer>> entry : m.entrySet()) {
+                char col = entry.getKey();
+                for (Integer l : entry.getValue()) {
+                    int row = l;
+                    if (checkLocValid(col, row)) {
+                        StringBuffer sb = new StringBuffer();
+                        sb.append(col);
+                        sb.append(row);
+                        if (b.getPiece(sb.toString()) == null) {
+                            toLoc.add(sb.toString());
+                        } else {
+                            //not vacant, friendly piece, can't move
+                            if (b.getPiece(sb.toString()).color().equals(this.color())) {
+                                continue;
+                            } else {
+                                //not vacant, opponent piece, capture
+                                toLoc.add(sb.toString());
+                            }
+                        }
+                    }
                 }
             }
             return toLoc;
