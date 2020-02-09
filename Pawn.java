@@ -43,19 +43,19 @@ public class Pawn extends Piece {
                 }
             }
             //capture possibility
-            toLoc.addAll(pawnCapture(b, c, r, this.color()));
+            toLoc.addAll(pawnCapture(b, c, r, this.color(), i));
             return toLoc;
         } else {
             throw new NoSuchElementException("pawn move exception: wrong start loc: " + loc);
         }
     }
 
-    private List<String> pawnCapture(Board b, char c, int r, Color color) {
+    private List<String> pawnCapture(Board b, char c, int r, Color color, int i) {
         List<String> toLoc = new LinkedList<>();
         HashMap<Character, List<Integer>> m = new HashMap<>();
         //diagonal
-        m.put((char) (c + 1), Arrays.asList(r + 1, r - 1));
-        m.put((char) (c - 1), Arrays.asList(r + 1, r - 1));
+        m.put((char) (c + 1), Arrays.asList(r + i));
+        m.put((char) (c - 1), Arrays.asList(r + i));
         for (Map.Entry<Character, List<Integer>> entry : m.entrySet()) {
             char col = entry.getKey();
             for (Integer row : entry.getValue()) {

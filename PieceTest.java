@@ -134,6 +134,7 @@ public class PieceTest {
 		Board.theBoard().addPiece(Piece.createPiece("bn"), "c3");
 		Board.theBoard().addPiece(Piece.createPiece("wp"), "d2");
 		Board.theBoard().addPiece(Piece.createPiece("wk"), "e3");
+		Board.theBoard().addPiece(Piece.createPiece("wk"), "c8");
 
 		List<String> toList = bp.moves(Board.theBoard(), "d7" );
 		List<String> cList = Arrays.asList("d6","d5","e6");
@@ -158,6 +159,8 @@ public class PieceTest {
 			}
 			Assert.assertEquals(true, cList2.contains(loc2));
 		}
+		Board.theBoard().movePiece("d7", "e6");
+		Board.theBoard().movePiece("e6", "e4");
 	}
 
 }
