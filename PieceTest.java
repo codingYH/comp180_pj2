@@ -21,7 +21,7 @@ public class PieceTest {
 	}
 
 	@Test
-	public void testKing() throws IOException {
+	public void testKing() {
 		Board.theBoard().clear();
 		Piece.registerPiece(new KingFactory());
 		Piece.registerPiece(new QueenFactory());
@@ -50,7 +50,7 @@ public class PieceTest {
 	}
 
 	@Test
-	public void testQueen() throws IOException {
+	public void testQueen(){
 		Board.theBoard().clear();
 		Piece.registerPiece(new KingFactory());
 		Piece.registerPiece(new QueenFactory());
@@ -82,7 +82,7 @@ public class PieceTest {
 	}
 
 	@Test
-	public void testKnight() throws IOException {
+	public void testKnight() {
 		Board.theBoard().clear();
 		Piece.registerPiece(new KingFactory());
 		Piece.registerPiece(new QueenFactory());
@@ -116,7 +116,7 @@ public class PieceTest {
 		Board.theBoard().movePiece("c7", "e8");
 	}
 	@Test
-	public void testPawn() throws IOException {
+	public void testPawn(){
 		Board.theBoard().clear();
 		Piece.registerPiece(new KingFactory());
 		Piece.registerPiece(new QueenFactory());
@@ -159,8 +159,8 @@ public class PieceTest {
 			}
 			Assert.assertEquals(true, cList2.contains(loc2));
 		}
-		Board.theBoard().movePiece("d7", "e6");
-		Board.theBoard().movePiece("e6", "e4");
+		Board.theBoard().movePiece("d7", "d5");
+		Board.theBoard().movePiece("d5", "d4");
 	}
 
 }

@@ -1,9 +1,10 @@
 import java.io.*;
 import java.nio.file.FileVisitResult;
+import java.util.NoSuchElementException;
 
 public class Chess {
 	//read layout file, add pieces
-	public static void layOut(String l) throws FileNotFoundException, IOException {
+	public static void layOut(String l){
 		//first clear Board
 		Board.theBoard().clear();
 		try {
@@ -23,14 +24,16 @@ public class Chess {
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			throw new NoSuchElementException("File not find");
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new NoSuchElementException("File not find");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	//read moves file, move pieces
-	public static void playMoves(String m) throws FileNotFoundException, IOException{
+	public static void playMoves(String m){
 		try {
 			File file = new File(m);
 			BufferedReader r = new BufferedReader(new FileReader(file));
@@ -47,11 +50,13 @@ public class Chess {
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			throw new NoSuchElementException("File not find");
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new NoSuchElementException("File not find");
 		}
 	}
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
 	if (args.length != 2) {
 	    System.out.println("Usage: java Chess layout moves");
 	}

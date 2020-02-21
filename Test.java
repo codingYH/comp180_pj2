@@ -35,6 +35,7 @@ public class Test {
 
 		List<String> toList = bk.moves(Board.theBoard(), "d5" );
 		List<String> cList = Arrays.asList("d4", "c5","e5","c6","e4","e6");
+
 		//size equal
 		assert  toList.size() == cList.size();
 		for(String loc : cList){
